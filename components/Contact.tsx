@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, AnimatePresence } from 'framer-motion'
 
 const HEADING = "LET'S CONNECT"
+const HEADING_WORDS = HEADING.split(' ')
 
 export default function Contact() {
   const ref = useRef<HTMLDivElement>(null)
@@ -36,20 +37,30 @@ export default function Contact() {
         <p className="text-xs tracking-[0.25em] uppercase text-[#AAAAAA] mb-8 font-medium">{`//`} Contact</p>
 
         {/* Large animated heading */}
-        <div className="flex flex-wrap mb-16 md:mb-24">
-          {HEADING.split('').map((char, i) => (
-            <motion.span
-              key={i}
-              className="text-[13vw] md:text-[10vw] font-bold leading-none tracking-tighter text-[#111111] cursor-default select-none"
-              style={{ display: 'inline-block', width: char === ' ' ? '0.25em' : 'auto' }}
-              initial={{ opacity: 0, y: 80 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
-              transition={{ duration: 0.7, delay: i * 0.04, ease: [0.22, 1, 0.36, 1] }}
-              whileHover={{ y: -16, color: '#ADB35B', transition: { duration: 0.2 } }}
-            >
-              {char === ' ' ? '\u00A0' : char}
-            </motion.span>
-          ))}
+        <div className="flex flex-wrap gap-x-[0.25em] gap-y-2 mb-16 md:mb-24">
+          {HEADING_WORDS.map((word, wordIndex) => {
+            const charOffset = HEADING_WORDS
+              .slice(0, wordIndex)
+              .reduce((count, currentWord) => count + currentWord.length, 0) + wordIndex
+
+            return (
+              <span key={word} className="inline-flex whitespace-nowrap">
+                {word.split('').map((char, charIndex) => (
+                  <motion.span
+                    key={`${word}-${charIndex}`}
+                    className="text-[13vw] md:text-[10vw] font-bold leading-none tracking-tighter text-[#111111] cursor-default select-none"
+                    style={{ display: 'inline-block' }}
+                    initial={{ opacity: 0, y: 80 }}
+                    animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
+                    transition={{ duration: 0.7, delay: (charOffset + charIndex) * 0.04, ease: [0.22, 1, 0.36, 1] }}
+                    whileHover={{ y: -16, color: '#ADB35B', transition: { duration: 0.2 } }}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </span>
+            )
+          })}
         </div>
 
         {/* Contact links */}
