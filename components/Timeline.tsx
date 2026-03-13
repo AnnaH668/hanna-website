@@ -58,7 +58,7 @@ export default function Timeline() {
 
   return (
     <>
-      <section id="work" className="bg-[#f6f7f1] px-6 py-20 border-y border-black/10 md:hidden">
+      <section id="work" className="bg-[#f6f7f1] px-6 py-20 border-y border-black/10 lg:hidden">
         <div className="max-w-xl mx-auto">
           <p className="text-xs tracking-[0.25em] uppercase text-[#888888] mb-4 font-medium">
             {`//`} Work
@@ -84,7 +84,7 @@ export default function Timeline() {
         </div>
       </section>
 
-      <section id="work-desktop" ref={targetRef} className="relative h-[350vh] bg-[#f6f7f1] z-10 hidden md:block">
+      <section id="work-desktop" ref={targetRef} className="relative h-[350vh] bg-[#f6f7f1] z-10 hidden lg:block">
         {/* Pinned container */}
         <div className="sticky top-0 h-screen flex items-center overflow-hidden border-y border-black/10 relative">
           {/* Scroll progress bar */}
