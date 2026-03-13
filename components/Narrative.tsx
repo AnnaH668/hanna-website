@@ -47,56 +47,82 @@ export default function Narrative() {
   const ctaY = useTransform(scrollYProgress, [0.75, 0.95], [20, 0])
 
   return (
-    <div
-      id="about"
-      ref={containerRef}
-      className="relative mt-12 md:mt-16"
-      style={{ height: '220vh' }}
-    >
-      {/* Sticky panel — stays in view while scrolling */}
-      <div className="sticky top-0 h-screen flex flex-col justify-center px-8 md:px-20 bg-[#f6f7f1] overflow-hidden">
-        <div className="max-w-4xl mx-auto w-full">
-
-          {/* Label */}
-          <p className="text-xs tracking-[0.25em] uppercase text-[#AAAAAA] mb-10 md:mb-16 font-medium">
+    <>
+      <section id="about" className="mt-10 px-6 py-20 bg-[#f6f7f1] md:hidden">
+        <div className="max-w-xl mx-auto">
+          <p className="text-xs tracking-[0.25em] uppercase text-[#AAAAAA] mb-8 font-medium">
             {`//`} About
           </p>
 
-          {/* Word-by-word reveal */}
           <p
-            className="text-3xl md:text-4xl lg:text-[3rem] font-normal text-[#111111] tracking-[0.04em]"
-            style={{ fontFamily: 'var(--font-fraunces)', lineHeight: '1.45', letterSpacing: '0.04em' }}
+            className="text-[2rem] font-normal text-[#111111]"
+            style={{ fontFamily: 'var(--font-fraunces)', lineHeight: '1.5', letterSpacing: '0.02em' }}
           >
-            {words.map((word, i) => {
-              const start = i / words.length
-              const end = Math.min((i + 1.5) / words.length, 1)
-              return (
-                <Word key={i} progress={scrollYProgress} range={[start, end]}>
-                  {word}
-                </Word>
-              )
-            })}
+            {words.join(' ')}
           </p>
 
-          {/* CTA — appears at the end */}
-          <MagneticElement>
-          <motion.a
+          <a
             href="https://www.linkedin.com/in/hanna-he-ba9a95176/"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-14 group inline-flex items-center gap-3 text-sm font-bold tracking-widest uppercase text-[#111111] border border-black/20 px-6 py-4 hover:bg-[#111111] hover:text-[#f6f7f1] transition-colors"
-            style={{ opacity: ctaOpacity, y: ctaY }}
+            className="mt-10 inline-flex items-center gap-3 text-xs font-bold tracking-widest uppercase text-[#111111] border border-black/20 px-5 py-3"
           >
             View LinkedIn
-            <ArrowUpRight
-              size={16}
-              className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-            />
-          </motion.a>
-          </MagneticElement>
+            <ArrowUpRight size={16} />
+          </a>
+        </div>
+      </section>
 
+      <div
+        ref={containerRef}
+        className="relative mt-12 md:mt-16 hidden md:block"
+        style={{ height: '220vh' }}
+      >
+        {/* Sticky panel — stays in view while scrolling */}
+        <div className="sticky top-0 h-screen flex flex-col justify-center px-8 md:px-20 bg-[#f6f7f1] overflow-hidden">
+          <div className="max-w-4xl mx-auto w-full">
+
+            {/* Label */}
+            <p className="text-xs tracking-[0.25em] uppercase text-[#AAAAAA] mb-10 md:mb-16 font-medium">
+              {`//`} About
+            </p>
+
+            {/* Word-by-word reveal */}
+            <p
+              className="text-3xl md:text-4xl lg:text-[3rem] font-normal text-[#111111] tracking-[0.04em]"
+              style={{ fontFamily: 'var(--font-fraunces)', lineHeight: '1.45', letterSpacing: '0.04em' }}
+            >
+              {words.map((word, i) => {
+                const start = i / words.length
+                const end = Math.min((i + 1.5) / words.length, 1)
+                return (
+                  <Word key={i} progress={scrollYProgress} range={[start, end]}>
+                    {word}
+                  </Word>
+                )
+              })}
+            </p>
+
+            {/* CTA — appears at the end */}
+            <MagneticElement>
+            <motion.a
+              href="https://www.linkedin.com/in/hanna-he-ba9a95176/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-14 group inline-flex items-center gap-3 text-sm font-bold tracking-widest uppercase text-[#111111] border border-black/20 px-6 py-4 hover:bg-[#111111] hover:text-[#f6f7f1] transition-colors"
+              style={{ opacity: ctaOpacity, y: ctaY }}
+            >
+              View LinkedIn
+              <ArrowUpRight
+                size={16}
+                className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+              />
+            </motion.a>
+            </MagneticElement>
+
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }

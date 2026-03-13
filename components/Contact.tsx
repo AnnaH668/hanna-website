@@ -48,7 +48,7 @@ export default function Contact() {
                 {word.split('').map((char, charIndex) => (
                   <motion.span
                     key={`${word}-${charIndex}`}
-                    className="text-[13vw] md:text-[10vw] font-bold leading-none tracking-tighter text-[#111111] cursor-default select-none"
+                    className="text-[18vw] sm:text-[15vw] md:text-[10vw] font-bold leading-none tracking-tighter text-[#111111] cursor-default select-none"
                     style={{ display: 'inline-block' }}
                     initial={{ opacity: 0, y: 80 }}
                     animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
